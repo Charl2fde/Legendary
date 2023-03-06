@@ -58,6 +58,7 @@
                 </select>
 
                 <input type="submit" value="Commander">
+                
             </form>
             <?php
                 include('connexion.php');
@@ -74,7 +75,7 @@
                 }
 
 
-                        $req = $bdd->prepare("INSERT INTO $table (nom, prenom, adresse, paiement, moto) VALUES (:nom, :prenom, :adresse, :paiement, :moto)");
+                        $req = $bd->prepare("INSERT INTO $table (nom, prenom, adresse, paiement, moto) VALUES (:nom, :prenom, :adresse, :paiement, :moto)");
 
                         $req->execute(array(
                             'nom' => $nom,
@@ -87,26 +88,25 @@
                         echo "Merci d'avoir noté !<br>";
 
                         var_dump($_POST);
-                        die();
-                ?>
-        </div>
-
-
-        <footer>
-            <div class="container">
-                <div class="footer-left">
-                    <h3>Legendary</h3>
-                    <p>&copy; 2023 | Tous droits réservés.</p>
-                </div>
-                <div class="footer-right">
-                    <ul>
-                        <li><a href="#">Nous Contacter</a></li>
-                        <li><a href="#">06 06 03 06 08</a></li>
-                        <li><a href="#">Instagram</a></li>
-                    </ul>
-                </div>
+                    ?>
             </div>
-        </footer>
-</body>
-</html>
+            <footer>
+                <div class="container">
+                    <div class="footer-left">
+                        <h3>Legendary</h3>
+                        <p>&copy; 2023 | Tous droits réservés.</p>
+                    </div>
+                    <div class="footer-right">
+                        <ul>
+                            <li><a href="#">Nous Contacter</a></li>
+                            <li><a href="#">06 06 03 06 08</a></li>
+                            <li><a href="#">Instagram</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
+    </body>
+    
+    </html>
+    
 

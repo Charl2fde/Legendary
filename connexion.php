@@ -5,7 +5,7 @@ $host = 'localhost';
 $dbname = 'id20407534_legendary';
 $username = 'id20407534_root';
 $password = 'tG1{7c^v&6KQR0[u';
-$table = 'moto_form';
+
 
 // Connexion à la base de données
 try {
