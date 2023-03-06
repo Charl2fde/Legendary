@@ -1,7 +1,5 @@
 <?php
-    
-    var_dump($_POST);
-    die(;)
+
     $servername = "localhost";
     $user = "root";
     $password = "";
@@ -30,4 +28,7 @@
         ));
 
         echo "Merci d'avoir noté !<br>";
+
+        var_dump($_POST);
+        die();
 ?>
