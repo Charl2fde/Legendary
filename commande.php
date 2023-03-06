@@ -63,7 +63,11 @@
             <?php
                 include('connexion.php');
                     $table = 'moto_form';
-
+                    $nom = '';
+                    $prenom = '';
+                    $adresse = '';
+                    $paiement = '';
+                    $modele = '';
                 if(isset($_POST['nom'], $_POST['prenom'], $_POST['adresse'], $_POST['paiement'], $_POST['modele'])) {
                     $nom = $_POST['nom'];
                     $prenom = $_POST['prenom'];
