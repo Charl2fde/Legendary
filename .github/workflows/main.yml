@@ -1,31 +1,16 @@
-on: push​
-
-name: Legendary​
-
-jobs:​
-
-  web-deploy:​
-
-    name: Deploy​
-
-    runs-on: ubuntu-latest​
-
-    steps:​
-
-    - name: Get latest code​
-
-      uses: actions/checkout@v3​
-
-    - name: Sync files​
-
-      uses: SamKirkland/FTP-Deploy-Action@4.3.3​
-
-      with:​
-
-        server: files.000webhost.com​
-
-        username: LegendaryM​
-
-        password: 7KtJ%EdVDzhU%*x(Hhkv​
-
-        server-dir : public_html/​
+on: push
+name: Deploy website on push
+jobs:
+  web-deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get latest code
+      uses: actions/checkout@v3
+    - name: Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.3.3
+      with:
+        server: files.000webhost.com
+        username: legendarym
+        password: 7KtJ%EdVDzhU%*x(Hhkv
+        server-dir : public_html/
