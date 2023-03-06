@@ -75,7 +75,7 @@
                 }
 
 
-                        $req = $bd->prepare("INSERT INTO $table (nom, prenom, adresse, paiement, moto) VALUES (:nom, :prenom, :adresse, :paiement, :moto)");
+                        $req = $db->prepare("INSERT INTO $table (nom, prenom, adresse, paiement, moto) VALUES (:nom, :prenom, :adresse, :paiement, :moto)");
 
                         $req->execute(array(
                             'nom' => $nom,
@@ -89,7 +89,7 @@
 
                         var_dump($_POST);
                     ?>
-            </div>
+        </div>
             <footer>
                 <div class="container">
                     <div class="footer-left">
