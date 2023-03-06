@@ -61,39 +61,40 @@
                 
             </form>
             <?php
-                include('connexion.php');
-                    $table = 'moto_form';
-                    $nom = '';
-                    $prenom = '';
-                    $adresse = '';
-                    $paiement = '';
-                    $modele = '';
-                if(isset($_POST['nom'], $_POST['prenom'], $_POST['adresse'], $_POST['paiement'], $_POST['modele'])) {
-                    $nom = $_POST['nom'];
-                    $prenom = $_POST['prenom'];
-                    $adresse = $_POST['adresse'];
-                    $paiement = $_POST['paiement'];
-                    $modele = $_POST['modele'];
+    include('connexion.php');
+    $table = 'moto_form';
+    $nom = '';
+    $prenom = '';
+    $adresse = '';
+    $paiement = '';
+    $modele = '';
+                    
+    if(isset($_POST['nom'], $_POST['prenom'], $_POST['adresse'], $_POST['paiement'], $_POST['modele'])) {
+        $nom = $_POST['nom'];
+        $prenom = $_POST['prenom'];
+        $adresse = $_POST['adresse'];
+        $paiement = $_POST['paiement'];
+        $modele = $_POST['modele'];
 
-                    var_dump($nom, $prenom, $adresse, $paiement, $modele);
-                }
+        var_dump($nom, $prenom, $adresse, $paiement, $modele);
+    }
 
+    $req = $db->prepare("INSERT INTO $table (nom, prenom, adresse, paiement, moto) VALUES (:nom, :prenom, :adresse, :paiement, :modele)");
 
-                        $req = $db->prepare("INSERT INTO $table (nom, prenom, adresse, paiement, moto) VALUES (:nom, :prenom, :adresse, :paiement, :moto)");
+    $req->execute(array(
+        ':nom' => $nom,
+        ':prenom' => $prenom,
+        ':adresse' => $adresse,
+        ':paiement' => $paiement,
+        ':modele' => $modele,
+    ));
 
-                        $req->execute(array(
-                            'nom' => $nom,
-                            'prenom' => $prenom,
-                            'adresse' => $adresse,
-                            'paiement' => $paiement,
-                            'modele' => $modele,
-                        ));
-                        var_dump($req);
+    var_dump($req);
 
-                        echo "Merci d'avoir noté !<br>";
+    echo "Merci d'avoir noté !<br>";
 
-                        var_dump($_POST);
-                    ?>
+    var_dump($_POST);
+?> 
         </div>
             <footer>
                 <div class="container">
