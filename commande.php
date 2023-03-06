@@ -86,8 +86,9 @@
                             'prenom' => $prenom,
                             'adresse' => $adresse,
                             'paiement' => $paiement,
-                            'modele' => $modele
+                            'modele' => $modele,
                         ));
+                        var_dump($req);
 
                         echo "Merci d'avoir noté !<br>";
 
