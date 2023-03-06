@@ -16,8 +16,8 @@
             <nav>
                 <img class="logo" src="./image/logo-removebg-preview.png" alt="logo">
                 <ul>
-                    <li><a href="index.html">Modèles</a></li>
-                    <li><a href="commande.html">Achats</a></li>
+                    <li><a href="index.php">Modèles</a></li>
+                    <li><a href="commande.php">Achats</a></li>
                     <li><a href="#">Entretien</a></li>
                     <li><a href="#">Notre marque</a></li>
                     <li><a href="#">Contact</a></li>
@@ -32,13 +32,13 @@
     <main>
         <h2>Modèles</h2>
         <hr>
-        <a href="commande.html" class="bouton">Commander</a>
+        <a href="commande.php" class="bouton">Commander</a>
         <div class="modèles">
             <section class="moto">
                 <div class="pl">
                     <div class="véhicule">
                         <div class="Honda">
-                            <a href="commande.html">
+                            <a href="commande.php">
                                 <img src="./image/moto/honda.png" alt="Honda">
                             </a>
                             <h3>Honda</h3>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="véhicule">
                         <div class="Kawasaki">
-                            <a href="commande.html">
+                            <a href="commande.php">
                                 <img src="./image/moto/kawasaki.png" alt="Kawa">
                             </a>
                             <h3>Kawasaki</h3>
@@ -54,7 +54,7 @@
                     </div>
                     <div class="véhicule">
                         <div class="KTM">
-                            <a href="commande.html">
+                            <a href="commande.php">
                                 <img src="./image/moto/ktm.png" alt="KTM">
                             </a>
                             <h3>KTM</h3>
@@ -64,7 +64,7 @@
                 <div class="dl">
                     <div class="véhicule">
                         <div class="BMW">
-                            <a href="commande.html">
+                            <a href="commande.php">
                                 <img src="./image/moto/bmw.webp" alt="BMW">
                             </a>
                             <h3>BMW</h3>
@@ -72,7 +72,7 @@
                     </div>
                     <div class="véhicule">
                         <div class="Yamaha">
-                            <a href="commande.html">
+                            <a href="commande.php">
                                 <img src="./image/moto/yamaha.webp" alt="Yamaha">
                             </a>
                             <h3>Yamaha</h3>
@@ -80,7 +80,7 @@
                     </div>
                     <div class="véhicule">
                         <div class="Ducati">
-                            <a href="commande.html">
+                            <a href="commande.php">
                                 <img src="./image/moto/ducati.webp" alt="Ducati">
                             </a>
                             <h3>Ducati</h3>
