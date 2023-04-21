@@ -12,5 +12,5 @@ jobs:
       with:
         server: files.000webhost.com
         username: legendarymoto
-        password: Chatelard0300
+        password: Chatelard0300$
         server-dir : public_html/
