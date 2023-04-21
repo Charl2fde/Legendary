@@ -77,7 +77,7 @@ header nav ul li a{
 }
 
 .haut-main{
-    background: url(./image/MTS-V4-06-Gallery-1920x1080-1.jpg);
+    background: url(../image/MTS-V4-06-Gallery-1920x1080-1.jpg);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -105,7 +105,7 @@ hr{
 
 /* --------présentation des modèles----------- */
 
-.modèles{
+.modeles{
     width: 100%;
     height: auto;
     background: rgb(255, 255, 255);
@@ -113,26 +113,10 @@ hr{
 }
 
 .moto {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
-
-.pl{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin: 0px 15px;
-    padding-bottom: 20px;
-}
-
-.dl{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin: 0px 15px;
-    padding-top: 20px;
-}
-
 h3{
     justify-content: center;
 }
@@ -160,25 +144,6 @@ h3{
     width: 400px;
     height: 280px;
 }
-
-.bouton {
-    margin-left: 150px;
-    margin-bottom: 50px;
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-}
-
-.bouton:hover {
-    background-color: #0062cc;
-}
-
 
 
 /* main */
