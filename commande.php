@@ -17,7 +17,7 @@
             <nav>
                 <img class="logo" src="./image/logo-removebg-preview.png" alt="logo">
                 <ul>
-                    <li><a href="index.html">Modèles</a></li>
+                    <li><a href="index.php">Modèles</a></li>
                     <li><a href="commande.html">Achats</a></li>
                     <li><a href="#">Entretien</a></li>
                     <li><a href="#">Notre marque</a></li>
