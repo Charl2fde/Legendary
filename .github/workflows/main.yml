@@ -11,6 +11,6 @@ jobs:
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
         server: files.000webhost.com
-        username: legendar.moto.bts
+        username: legendarymoto
         password: Chatelard0300
         server-dir : public_html/
