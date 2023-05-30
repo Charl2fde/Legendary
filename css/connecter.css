@@ -63,8 +63,69 @@ header nav ul li a{
 /* nav barre */
 
 
-/* formulaire  */
+/* formulaire */
 
+
+.container1 {
+    background: url(../image/Yamaha.jpg);
+    background-size: cover;
+    background-position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    color: #fff;
+    /* Couleur de texte */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    /* Ombre textuelle */
+    font-size: 38px;
+    margin-top: 60px;
+}
+
+form {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    width: 500px;
+    margin-bottom: 120px;
+    margin-top: 50px;
+    padding: 50px 30px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+form input[type="email"],
+form input[type="password"] {
+    align-items: center;
+    width: 80%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+    border-radius: 2px;
+    background-color: transparent;
+}
+
+form input[type="submit"] {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 30px;
+}
+
+form input[type="submit"]:hover {
+    background-color: #333;
+}
 
 
 

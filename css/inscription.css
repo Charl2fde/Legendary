@@ -1,9 +1,9 @@
-*{
+* {
     margin: 0%;
     font-family: 'poppins';
 }
 
-@font-face{
+@font-face {
     font-family: 'poppins';
     src: url(./fonts/Poppins/Poppins-Italic.ttf);
 }
@@ -11,20 +11,20 @@
 /* --------------------------------------header-------------------- */
 /* nav barre */
 
-header{
+header {
     height: 130px;
     width: 100%;
-    background: rgb(0, 0, 0, .5) ;
+    background: rgb(0, 0, 0, .5);
     border-bottom: 2px solid;
     border-color: rgba(255, 255, 255);
 }
 
-.logo{
+.logo {
     padding-left: 10px;
     width: 280px;
 }
 
-header nav{
+header nav {
     height: 130px;
     width: 100%;
     margin: 0;
@@ -33,17 +33,17 @@ header nav{
     align-items: center;
 }
 
-header nav ul{
+header nav ul {
     list-style-type: none;
     display: flex;
 }
 
-header nav ul li:hover{
+header nav ul li:hover {
     background: rgba(0, 0, 0, 0.5);
     transition: 0.8s;
 }
 
-header nav ul li a:hover{
+header nav ul li a:hover {
     color: rgb(255, 255, 255);
     text-shadow: 0px 0px 20px #ffffff;
 }
@@ -52,10 +52,10 @@ header nav ul li {
     font-size: 26px;
 }
 
-header nav ul li a{
+header nav ul li a {
     text-decoration: none;
     color: rgb(255, 255, 255);
-    margin: 0px; 
+    margin: 0px;
     display: block;
     padding: 45px 60px;
 }
@@ -65,60 +65,67 @@ header nav ul li a{
 /* formulaire */
 
 
-.container {
-    background-image: url('chemin_vers_l_image');
+.container1 {
+    background: url(../image/Yamaha.jpg);
     background-size: cover;
-    background-position: center;
-    padding: 40px;
+    background-position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    color: #fff;
+    /* Couleur de texte */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    /* Ombre textuelle */
+    font-size: 38px;
+    margin-top: 60px;
 }
 
 form {
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    width: 500px;
+    margin-bottom: 120px;
+    margin-top: 50px;
+    padding: 50px 30px;
 }
 
-label {
+form label {
     display: block;
+    margin-bottom: 8px;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"] {
+    align-items: center;
+    width: 80%;
+    padding: 5px;
     margin-bottom: 10px;
-    font-weight: bold;
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+    border-radius: 2px;
+    background-color: transparent;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    width: 100%;
-}
-
-input[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
+form input[type="submit"] {
+    background-color: #000;
+    color: #fff;
     border: none;
     padding: 10px 20px;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
-    margin-top: 20px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 30px;
 }
 
-input[type="submit"]:hover {
-    background-color: #45a049;
+form input[type="submit"]:hover {
+    background-color: #333;
 }
-
-p {
-    margin-top: 10px;
-    text-align: center;
-}
-
-a {
-    color: #4CAF50;
-    text-decoration: none;
-}
-
 
 
 
@@ -129,51 +136,53 @@ footer {
     background: linear-gradient(to right, white, #ddd, #7a7a7a, #ddd, white);
     background-size: 400% 400%;
     animation: gradient 15s ease-in-out infinite;
-  }
-  
-  @keyframes gradient {
+}
+
+@keyframes gradient {
     0% {
-      background-position: 0% 50%;
+        background-position: 0% 50%;
     }
+
     50% {
-      background-position: 100% 50%;
+        background-position: 100% 50%;
     }
+
     100% {
-      background-position: 0% 50%;
+        background-position: 0% 50%;
     }
-  }
-  
-  .container {
+}
+
+.container {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     max-width: 1200px;
     margin: 0 auto;
-  }
-  
-  .footer-left {
+}
+
+.footer-left {
     width: 60%;
-  }
-  
-  .footer-left h3 {
+}
+
+.footer-left h3 {
     font-size: 24px;
     margin-bottom: 20px;
-  }
-  
-  .footer-right ul {
+}
+
+.footer-right ul {
     list-style: none;
     padding: 0;
-  }
-  
-  .footer-right li {
+}
+
+.footer-right li {
     margin-bottom: 10px;
-  }
-  
-  .footer-right a {
+}
+
+.footer-right a {
     color: #333;
     text-decoration: none;
-  }
-  
-  .footer-right a:hover {
+}
+
+.footer-right a:hover {
     text-decoration: underline;
-  }
+}

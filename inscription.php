@@ -24,8 +24,9 @@
         </nav>
     </header>
 
+    <div class="container1">
     <h1>Inscription</h1>
-    <div class="container">
+    
         <form action="inscription.php" method="POST">
             <label for="nom">Nom :</label>
             <input type="text" id="nom" name="nom" required><br><br>
@@ -36,7 +37,7 @@
             <label for="motdepasse">Mot de passe :</label>
             <input type="password" id="motdepasse" name="motdepasse" required><br><br>
 
-            <input type="submit" value="S'inscrire">
+            <input class='boutton' type="submit" value="S'inscrire">
 
             <p>Déjà un compte ? <a href="connecter.php">Connexion</a></p>
         </form>

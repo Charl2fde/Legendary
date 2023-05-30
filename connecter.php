@@ -21,7 +21,7 @@
             </ul>
         </nav>
     </header>
-
+<div class="container1">
     <h1>Connexion</h1>
     <form action="connecter.php" method="POST">
         <label for="email">Mail :</label>
@@ -31,8 +31,10 @@
         <input type="password" id="motdepasse" name="motdepasse" required><br><br>
 
         <input type="submit" value="Se connecter">
+        <p>Vous n'avez pas de compte ? <a href="inscription.php">Inscription</a></p>
     </form>
-    <p>Vous n'avez pas de compte ? <a href="inscription.php">Inscription</a></p>
+    
+</div>
 </body>
 
 <?php
