@@ -20,7 +20,7 @@
                     <li><a href="commande.php">Achats</a></li>
                     <li><a href="#">Entretien</a></li>
                     <li><a href="#">Notre marque</a></li>
-                    <li><a href="#">Connexion</a></li>
+                    <li><a href="inscription.php">Connexion</a></li>
                 </ul>
             </nav>
         </header>

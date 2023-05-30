@@ -1,0 +1,125 @@
+*{
+    margin: 0%;
+    font-family: 'poppins';
+}
+
+@font-face{
+    font-family: 'poppins';
+    src: url(./fonts/Poppins/Poppins-Italic.ttf);
+}
+
+/* --------------------------------------header-------------------- */
+/* nav barre */
+
+header{
+    height: 130px;
+    width: 100%;
+    background: rgb(0, 0, 0, .5) ;
+    border-bottom: 2px solid;
+    border-color: rgba(255, 255, 255);
+}
+
+.logo{
+    padding-left: 10px;
+    width: 280px;
+}
+
+header nav{
+    height: 130px;
+    width: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav ul{
+    list-style-type: none;
+    display: flex;
+}
+
+header nav ul li:hover{
+    background: rgba(0, 0, 0, 0.5);
+    transition: 0.8s;
+}
+
+header nav ul li a:hover{
+    color: rgb(255, 255, 255);
+    text-shadow: 0px 0px 20px #ffffff;
+}
+
+header nav ul li {
+    font-size: 26px;
+}
+
+header nav ul li a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    margin: 0px; 
+    display: block;
+    padding: 45px 60px;
+}
+
+/* nav barre */
+
+
+/* formulaire  */
+
+
+
+
+/* footer */
+footer {
+    padding: 40px 0;
+    position: relative;
+    background: linear-gradient(to right, white, #ddd, #7a7a7a, #ddd, white);
+    background-size: 400% 400%;
+    animation: gradient 15s ease-in-out infinite;
+  }
+  
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .footer-left {
+    width: 60%;
+  }
+  
+  .footer-left h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .footer-right ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-right li {
+    margin-bottom: 10px;
+  }
+  
+  .footer-right a {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .footer-right a:hover {
+    text-decoration: underline;
+  }
