@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/commande.css">
+    <link rel="stylesheet" href="./css/commande.css">
     <link rel="shortcut icon" href="./image/Motorcycle-Helmet-PNG-Background.ico" type="image/x-icon">
     <title>Legendary Motorsport</title>
 </head>
@@ -13,13 +13,13 @@
 <body>
         <header>
             <nav>
-                <img class="logo" src="../image/logo-removebg-preview.png" alt="logo">
+                <img class="logo" src="./image/logo.png" alt="logo">
                 <ul>
                     <li><a href="index.php">Modèles</a></li>
                     <li><a href="commande.php">Achats</a></li>
                     <li><a href="#">Entretien</a></li>
                     <li><a href="#">Notre marque</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Connexion</a></li>
                 </ul>
             </nav>
         </header>

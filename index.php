@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
     <link rel="shortcut icon" href="./image/Motorcycle-Helmet-PNG-Background.ico" type="image/x-icon">
     <title>Legendary Motorsport</title>
 </head>
@@ -14,13 +14,13 @@
     <div class="haut-main">
         <header>
             <nav>
-                <img class="logo" src="../image/logo-removebg-preview.png" alt="logo">
+                <img class="logo" src="./image/logo.png" alt="logo">
                 <ul>
                     <li><a href="index.php">Modèles</a></li>
                     <li><a href="commande.php">Achats</a></li>
                     <li><a href="#">Entretien</a></li>
                     <li><a href="#">Notre marque</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Connexion</a></li>
                 </ul>
             </nav>
         </header>
@@ -42,7 +42,7 @@ echo/* écire dans la page html */ '
                     echo"<div class='véhicule'>
                             <div class='Honda'>
                                 <a href='commande.php?id_moto=$row[id]&stock=$row[stock]&moto_name=$row[moto_name]&prix=$row[prix]'>
-                                    <img src='$row[image_url]' alt='$row[moto_name]'>
+                                <img src='./moto/$row[image_url]' alt='$row[moto_name]'>
                                 </a>
                                 <h3>$row[moto_name]</h3>
                                 <p>Prix: $row[prix]</p>
