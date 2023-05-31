@@ -57,15 +57,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     include "connexion.php";
 
     // Préparer et exécuter la requête d'insertion
-    $query = $db->prepare("INSERT INTO compte (nom, email, motdepasse) VALUES (?, ?, ?)");
+    $query = $db->prepare("INSERT INTO compte (nom, email, motdepasse, role) VALUES (?, ?, ?, 'utilisateur')");
     $query->execute([$nom, $email, $motdepasse]);
 
     // Rediriger vers une page de succès ou afficher un message
     header("Location: inscription_success.php");
     exit;
 }
-
 ?>
+
+
 <footer>
         <div class="container">
           <div class="footer-left">

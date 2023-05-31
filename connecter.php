@@ -36,7 +36,6 @@
     
 </div>
 </body>
-
 <?php
 include('connexion.php');
 session_start(); // Démarrer une session
@@ -57,19 +56,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($compte && password_verify($motdepasse, $compte['motdepasse'])) {
         // Les informations de connexion sont valides
 
-        // Stocker les informations de l'utilisateur dans la session
-        $_SESSION['id'] = $compte['id'];
-        $_SESSION['nom'] = $compte['nom'];
-
-        // Rediriger vers une page de succès ou accéder à l'espace membre
-        header("Location: espace_membre.php");
-        exit;
+        // Vérifier le rôle de l'utilisateur
+        if ($compte['role'] === 'admin') {
+            // Rediriger vers une page réservée aux administrateurs
+            header("Location: page_admin.php");
+            exit;
+        } else {
+            // Rediriger vers une page réservée aux utilisateurs
+            header("Location: page_utilisateur.php");
+            exit;
+        }
     } else {
         // Les informations de connexion sont invalides
         echo "Identifiants invalides. Veuillez réessayer.";
     }
 }
 ?>
+
 <footer>
         <div class="container">
           <div class="footer-left">
