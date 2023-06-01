@@ -1,0 +1,105 @@
+* {
+    margin: 0%;
+    font-family: 'poppins';
+}
+
+@font-face {
+    font-family: 'poppins';
+    src: url(./fonts/Poppins/Poppins-Italic.ttf);
+}
+
+/* --------------------------------------header-------------------- */
+/* nav barre */
+
+header {
+    height: 130px;
+    width: 100%;
+    background: rgb(0, 0, 0, .5);
+    border-bottom: 2px solid;
+    border-color: rgba(255, 255, 255);
+}
+
+.logo {
+    padding-left: 10px;
+    width: 280px;
+}
+
+header nav {
+    height: 130px;
+    width: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav ul {
+    list-style-type: none;
+    display: flex;
+}
+
+header nav ul li:hover {
+    background: rgba(0, 0, 0, 0.5);
+    transition: 0.8s;
+}
+
+header nav ul li a:hover {
+    color: rgb(255, 255, 255);
+    text-shadow: 0px 0px 20px #ffffff;
+}
+
+header nav ul li {
+    font-size: 26px;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    margin: 0px;
+    display: block;
+    padding: 45px 60px;
+}
+
+/* nav barre */
+
+/* corps */
+
+/* CSS pour la partie "Informations personnelles" */
+.infos-perso {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    margin-left: 140px;
+    margin-right: 140px;
+    margin-top: 150px;
+}
+
+.infos-perso h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.infos-perso p {
+    color: #777;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+
+
+/* CSS pour la partie "Historique d'achat" */
+.historique {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    margin-left: 140px;
+    margin-right: 140px;
+}
+
+.historique h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+}

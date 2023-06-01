@@ -56,6 +56,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($compte && password_verify($motdepasse, $compte['motdepasse'])) {
         // Les informations de connexion sont valides
 
+        // Stocker les informations de l'utilisateur dans des variables de session
+        $_SESSION['email'] = $compte['email'];
+        $_SESSION['role'] = $compte['role'];
+
         // Vérifier le rôle de l'utilisateur
         if ($compte['role'] === 'admin') {
             // Rediriger vers une page réservée aux administrateurs
@@ -72,6 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 
 <footer>
         <div class="container">

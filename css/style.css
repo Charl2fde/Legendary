@@ -1,21 +1,20 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
-*{
-    margin: 0%;
-    font-family: 'Poppins', sans-serif;
-    /* outline: 2px solid limegreen; */
+* {
+  margin: 0%;
+  font-family: 'Poppins', sans-serif;
+  /* outline: 2px solid limegreen; */
 }
+
 :root {
   --couleur-bouton-valider: #0da826;
   --couleur-bouton-supprimer: #FF0000;
-
-    --couleur-fond-principale: #FFFFFF;
-    --couleur-texte-principal: #000000;
-    --couleur-accentuation: #FFD700;
-    --couleur-fond-sections: #F5F5F5;
-    --couleur-fond-navbar: rgba(0, 0, 0, 0.5);
-    --couleur-icones: #000000;
+  --couleur-fond-principale: #FFFFFF;
+  --couleur-texte-principal: #000000;
+  --couleur-accentuation: #FFD700;
+  --couleur-fond-sections: #F5F5F5;
+  --couleur-fond-navbar: rgba(0, 0, 0, 0.5);
+  --couleur-icones: #000000;
   --couleur-fond-principale-foncer: #222222;
   --couleur-texte-principal-foncer: #FFFFFF;
   --couleur-accentuation-foncer: #FFD700;
@@ -24,26 +23,27 @@
   --couleur-icones-foncer: #FFFFFF;
 }
 
-body{
+body {
   font-family: 'Poppins', sans-serif;
 }
+
 /* --------------------------------------header-------------------- */
 /* nav barre */
 
-header{
+header {
   height: 130px;
   width: 100%;
-  background: rgb(0, 0, 0, .5) ;
+  background: rgb(0, 0, 0, .5);
   border-bottom: 2px solid;
   border-color: rgba(255, 255, 255);
 }
 
-.logo{
+.logo {
   padding-left: 10px;
   width: 280px;
 }
 
-header nav{
+header nav {
   height: 130px;
   width: 100%;
   margin: 0;
@@ -52,17 +52,17 @@ header nav{
   align-items: center;
 }
 
-header nav ul{
+header nav ul {
   list-style-type: none;
   display: flex;
 }
 
-header nav ul li:hover{
+header nav ul li:hover {
   background: rgba(0, 0, 0, 0.5);
   transition: 0.8s;
 }
 
-header nav ul li a:hover{
+header nav ul li a:hover {
   color: rgb(255, 255, 255);
   text-shadow: 0px 0px 20px #ffffff;
 }
@@ -71,10 +71,10 @@ header nav ul li {
   font-size: 26px;
 }
 
-header nav ul li a{
+header nav ul li a {
   text-decoration: none;
   color: rgb(255, 255, 255);
-  margin: 0px; 
+  margin: 0px;
   display: block;
   padding: 45px 60px;
 }
@@ -84,52 +84,52 @@ header nav ul li a{
 
 /* nav barre */
 
-.titre{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    font-size: 55px;
-    padding: 275px 0px;
+.titre {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size: 55px;
+  padding: 275px 0px;
 }
 
-.titre h1{
-    color: #ffffff;
+.titre h1 {
+  color: #ffffff;
 }
 
-.haut-main{
-    background: url(../image/MTS-V4-06-Gallery-1920x1080-1.jpg);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    width: 100%;
-    height: auto;
-    display: block;
+.haut-main {
+  background: url(../image/MTS-V4-06-Gallery-1920x1080-1.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* ----------------------------------------header------------------------------ */
 
 /* main */
 
-h2{
-    margin-left: 150px;
-    margin-top: 40px;
-    font-size: 50px;
+h2 {
+  margin-left: 150px;
+  margin-top: 40px;
+  font-size: 50px;
 }
 
-hr{
-    margin-top: 12px;
-    margin-bottom: 90px;
-    margin-left: 150px;
-    margin-right: 150px;
+hr {
+  margin-top: 12px;
+  margin-bottom: 90px;
+  margin-left: 150px;
+  margin-right: 150px;
 }
 
 /* --------présentation des modèles----------- */
 
-.modeles{
-    width: 100%;
-    height: auto;
-    background: rgb(255, 255, 255);
-    padding-bottom: 70px;
+.modeles {
+  width: 100%;
+  height: auto;
+  background: rgb(255, 255, 255);
+  padding-bottom: 70px;
 }
 
 .moto {
@@ -137,32 +137,33 @@ hr{
   flex-wrap: wrap;
   justify-content: space-around;
 }
-h3{
-    justify-content: center;
-}
-  
-.véhicule {
-    text-align:center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    max-width: 100%;
-    height: auto;
-    position: relative;
-    overflow: hidden;
-    border-bottom: solid rgb(0, 0, 0) 1px;
+
+h3 {
+  justify-content: center;
 }
 
-.véhicule:hover{
-    transform: scale(1.1);
-    transition: transform 0.3s ease-in-out;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+.véhicule {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 100%;
+  height: auto;
+  position: relative;
+  overflow: hidden;
+  border-bottom: solid rgb(0, 0, 0) 1px;
+}
+
+.véhicule:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .véhicule img {
-    padding: 20px 50px;
-    width: 400px;
-    height: 280px;
+  padding: 20px 50px;
+  width: 400px;
+  height: 280px;
 }
 
 
@@ -182,9 +183,11 @@ footer {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -229,41 +232,44 @@ footer {
 
 /* Style pour les écrans larges (desktop) */
 @media screen and (min-width: 1200px) {
-    .modèles {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-    }
-    .véhicule {
-      width: 30%;
-      margin-bottom: 30px;
-    }
+  .modèles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
   }
-  
-   @media screen and (max-width: 1199px) and (min-width: 768px) { 
-    .modèles {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-    }
-    .véhicule {
-      width: 45%;
-      margin-bottom: 30px;
-    }
+
+  .véhicule {
+    width: 30%;
+    margin-bottom: 30px;
   }
-  
-  
-  @media screen and (max-width: 767px) {
-    .modèles {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .véhicule {
-      width: 90%;
-      margin-bottom: 30px;
-    }
+}
+
+@media screen and (max-width: 1199px) and (min-width: 768px) {
+  .modèles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
   }
+
+  .véhicule {
+    width: 45%;
+    margin-bottom: 30px;
+  }
+}
+
+
+@media screen and (max-width: 767px) {
+  .modèles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .véhicule {
+    width: 90%;
+    margin-bottom: 30px;
+  }
+}
 
 
 /* page admin */
@@ -334,9 +340,9 @@ select:focus {
   outline: none;
 }
 
-.admin-modif select:focus + .input-icon,
-.admin-modif input[type="number"]:active + .input-icon,
-.admin-modif input[type="number"]:focus + .input-icon {
+.admin-modif select:focus+.input-icon,
+.admin-modif input[type="number"]:active+.input-icon,
+.admin-modif input[type="number"]:focus+.input-icon {
   border: 2px solid var(--couleur-accentuation) !important;
 }
 
@@ -378,14 +384,16 @@ select:focus {
 }
 
 .admin-modif button#bouton-supprimer:hover {
-  background-color: #a80f0f; /* Couleur plus sombre pour l'effet d'assombrissement */
+  background-color: #a80f0f;
+  /* Couleur plus sombre pour l'effet d'assombrissement */
 }
 
 .admin-modif button#bouton-valider:hover {
-  background-color: #098120; /* Couleur plus sombre pour l'effet d'assombrissement */
+  background-color: #098120;
+  /* Couleur plus sombre pour l'effet d'assombrissement */
 }
 
 
-#unique{
+#unique {
   background: none;
 }
