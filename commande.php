@@ -60,33 +60,36 @@
                 ?>
                 <input type="submit" value="Commander" name="submit" class="submit">                
             </form>
-<?php
-    include('connexion.php'); // inclut la connexion a la base
-    if(isset($_POST["submit"])) { // si le bouton submit est cliquer
-        $moto_name = $_POST['moto_name'];// stocker dans des variables les valeurs des inputs
-        $stock = $_POST['stock'];// stocker dans des variables les valeurs des inputs
-        $nom = $_POST['nom'];// stocker dans des variables les valeurs des inputs
-        $prenom = $_POST['prenom'];// stocker dans des variables les valeurs des inputs
-        $adresse = $_POST['adresse'];// stocker dans des variables les valeurs des inputs
-        $num_carte = $_POST['num_carte'];// stocker dans des variables les valeurs des inputs
-        $date_exp = $_POST['date_exp'];// stocker dans des variables les valeurs des inputs
-        $cvv = $_POST['cvv'];// stocker dans des variables les valeurs des inputs
-        $stock-=1; // stock a -1
+            <?php
+include('connexion.php'); // inclut la connexion à la base de données
 
-        $query = $db->prepare("UPDATE moto SET stock = '$stock' WHERE moto_name = '$moto_name'");// SQL: Changer la valeur de stock ou le nom de la moto est le même que dans le input
-        $query->execute();// éxecution de la requête SQL
+if (isset($_POST["submit"])) { // si le bouton submit est cliqué
+    $moto_name = $_POST['moto_name'];// stocker dans des variables les valeurs des inputs
+    $nom = $_POST['nom'];// stocker dans des variables les valeurs des inputs
+    $prenom = $_POST['prenom'];// stocker dans des variables les valeurs des inputs
+    $adresse = $_POST['adresse'];// stocker dans des variables les valeurs des inputs
+    $num_carte = $_POST['num_carte'];// stocker dans des variables les valeurs des inputs
+    $date_exp = $_POST['date_exp'];// stocker dans des variables les valeurs des inputs
+    $cvv = $_POST['cvv'];// stocker dans des variables les valeurs des inputs
 
-        $query2 = $db->prepare("INSERT INTO users (nom, prenom, adresse, num_carte, date_exp, cvv) VALUES (:nom, :prenom, :adresse, :num_carte, :date_exp, :cvv)");// inserer dans la table users dans les colonnes x les valeurs x
-        $query2->execute(array(//execuiter la requete non préparée
-            ':nom' => $nom,
-            ':prenom' => $prenom,
-            ':adresse' => $adresse,
-            ':num_carte'=>$num_carte,
-            'date_exp'=>$date_exp,
-            ':cvv'=>$cvv
-        ));
-    }
+    // Mettre à jour le stock de la moto sélectionnée
+    $updateQuery = $db->prepare("UPDATE moto SET stock = stock - 1 WHERE moto_name = :moto_name");
+    $updateQuery->execute([':moto_name' => $moto_name]);
+
+    // Insérer les données dans la table "users"
+    $insertQuery = $db->prepare("INSERT INTO users (nom, prenom, adresse, num_carte, date_exp, cvv) VALUES (:nom, :prenom, :adresse, :num_carte, :date_exp, :cvv)");
+    $insertQuery->execute([
+        ':nom' => $nom,
+        ':prenom' => $prenom,
+        ':adresse' => $adresse,
+        ':num_carte' => $num_carte,
+        ':date_exp' => $date_exp,
+        ':cvv' => $cvv
+    ]);
+}
 ?>
+
+
         </div>
             <footer>
                 <div class="container">
