@@ -1,3 +1,72 @@
+<?php
+include('connexion.php');
+session_start();
+
+// Vérifier si l'utilisateur est connecté
+if (isset($_SESSION['id_compte'])) {
+    // Récupérer l'ID du compte connecté
+    $id_compte = $_SESSION['id_compte'];
+    // Rediriger vers la page de connexion
+    header("Location: connecter.php");
+    exit;
+}
+
+
+error_reporting(0);
+
+if (isset($_POST["submit"])) {
+    // Récupérer les valeurs des champs du formulaire
+    $id_moto = $_POST['id_moto'];
+    $nom = $_POST['nom'];
+    $prenom = $_POST['prenom'];
+    $adresse = $_POST['adresse'];
+    $code_postal = $_POST['code_postal'];
+    $email = $_POST['email'];
+
+    // Effectuer les opérations nécessaires (par exemple, récupérer le prix de la moto)
+    $query_moto = $db->prepare("SELECT prix FROM moto WHERE id = :id_moto");
+    $query_moto->execute(array(':id_moto' => $id_moto));
+    $row = $query_moto->fetch(PDO::FETCH_ASSOC);
+    $prix = $row['prix'];
+
+    // Récupérer l'ID du compte connecté
+    $id_compte = $_SESSION['id_compte'];
+
+    // Insérer les données dans la table commande
+    $query = $db->prepare("INSERT INTO commande (id_moto, prix, prenom, nom, adresse, code_postal, email, id_compte)
+    VALUES (:id_moto, :prix, :prenom, :nom, :adresse, :code_postal, :email, :id_compte)");
+    $query->execute(array(
+        ':id_moto' => $id_moto,
+        ':prix' => $prix,
+        ':prenom' => $prenom,
+        ':nom' => $nom,
+        ':adresse' => $adresse,
+        ':code_postal' => $code_postal,
+        ':email' => $email,
+        ':id_compte' => $id_compte,
+    ));
+
+    // Mettre à jour le stock de la moto
+    $query = $db->prepare("UPDATE moto SET stock = stock - 1 WHERE id = :id_moto");
+    $query->execute(array(':id_moto' => $id_moto));
+
+    // Rediriger vers une page de confirmation ou une autre page appropriée
+    header("Location: page_utilisateur.php");
+    exit();
+}
+
+// Récupérer les informations du compte connecté
+$id_compte = $_SESSION['id_compte'];
+$query_compte = $db->prepare("SELECT prenom, nom, adresse, code_postal, email FROM compte WHERE id = :id_compte");
+$query_compte->execute(array(':id_compte' => $id_compte));
+$compte = $query_compte->fetch(PDO::FETCH_ASSOC);
+$prenom = $compte['prenom'];
+$nom = $compte['nom'];
+$adresse = $compte['adresse'];
+$code_postal = $compte['code_postal'];
+$email = $compte['email'];
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -11,100 +80,72 @@
 </head>
 
 <body>
-        <header>
-            <nav>
-                <img class="logo" src="./image/logo.png" alt="logo">
+    <header>
+        <nav>
+            <img class="logo" src="./image/logo.png" alt="logo">
+            <ul>
+                <li><a href="page_utilisateur.php">Modèles</a></li>
+                <li><a href="commande.php">Achats</a></li>
+                <li><a href="#">Entretien</a></li>
+                <li><a href="#">Notre marque</a></li>
+                <li><a href="profil.php">Mon profil</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h2>Ma commande :</h2>
+
+    <div class="formulaire">
+        <form action="commande.php" method="post">
+            <label for="nom">Nom :</label>
+            <input type="text" id="nom" name="nom" value="<?php echo $nom; ?>" required>
+
+            <label for="prenom">Prénom :</label>
+            <input type="text" id="prenom" name="prenom" value="<?php echo $prenom; ?>" required>
+
+            <label for="adresse">Adresse :</label>
+            <input type="text" id="adresse" name="adresse" value="<?php echo $adresse; ?>" required>
+
+            <label for="code_postal">Code Postal :</label>
+            <input type="text" id="code_postal" name="code_postal" value="<?php echo $code_postal; ?>" required>
+
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" value="<?php echo $email; ?>" required>
+
+            <label for="moyen_paiement">Moyen de paiement :</label>
+            <input type="text" id="num_carte" name="num_carte" placeholder="Numéro de carte bancaire" required>
+            <input type="text" id="date_exp" name="date_exp" placeholder="Date d'expiration" required>
+            <input type="text" id="cvv" name="cvv" placeholder="Code CVV" required>
+
+            <?php
+            $moto_name = $_GET['moto_name'];
+            $id = $_GET['id_moto'];
+            echo "
+                <input type='hidden' name='id_moto' value='$id'>
+                <label for='moto_name'>Nom de la moto :</label>
+                <input type='text' id='moto_name' name='moto_name' value='$moto_name' readonly>
+            ";
+            ?>
+
+            <input type="submit" value="Commander" name="submit" class="submit">
+        </form>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-left">
+                <h3>Legendary</h3>
+                <p>&copy; 2023 | Tous droits réservés.</p>
+            </div>
+            <div class="footer-right">
                 <ul>
-                    <li><a href="index.php">Modèles</a></li>
-                    <li><a href="commande.php">Achats</a></li>
-                    <li><a href="#">Entretien</a></li>
-                    <li><a href="#">Notre marque</a></li>
-                    <li><a href="inscription.php">Connexion</a></li>
+                    <li><a href="#">Nous Contacter</a></li>
+                    <li><a href="#">06 06 03 06 08</a></li>
+                    <li><a href="#">Instagram</a></li>
                 </ul>
-            </nav>
-        </header>
-
-
-        <h2>Ma commande :</h2>
-
-        <div class="formulaire">
-            <form action="commande.php" method="post">
-                <label id="nom" for="nom">Nom :</label>
-                <input type="text" id="nom" name="nom" required>
-
-                <label id="prenom" for="prenom">Prénom :</label>
-                <input type="text" id="prenom" name="prenom" required>
-
-                <label id="=adresse" for="adresse">Adresse :</label>
-                <input type="text" id="adresse" name="adresse" required>
-
-                <label id="paiement">Moyen de paiement :</label>
-                <input type="text" name="num_carte" placeholder="Numéro de carte bancaire" required>
-                <input type="text" name="date_exp" placeholder="Date d'expiration" required>
-                <input type="text" name="cvv" placeholder="Code CVV" required>
-                <?php
-                    error_reporting(0);
-                    $moto_name = $_GET['moto_name'];// récupération des données dans l'url
-                    $stock = $_GET['stock'];// récupération des données dans l'url
-                    $id = $_GET['id_moto'];// récupération des données dans l'url
-                    $prix = $_GET['prix'];// récupération des données dans l'url
-                    echo"
-                        <label>Référence de la moto :</label>
-                        <input type='text' name='moto_name' value='$moto_name' required>
-                        
-                        <label>Quantitée en stock :</label>
-                        <input type='text' name='stock' value='$stock' required>
-
-                        <label>Prix de la moto :</label>
-                        <input type='text' name='prix' value='$prix' required>"
-                ?>
-                <input type="submit" value="Commander" name="submit" class="submit">                
-            </form>
-<?php
-    include('connexion.php'); // inclut la connexion a la base
-    if(isset($_POST["submit"])) { // si le bouton submit est cliquer
-        $moto_name = $_POST['moto_name'];// stocker dans des variables les valeurs des inputs
-        $stock = $_POST['stock'];// stocker dans des variables les valeurs des inputs
-        $nom = $_POST['nom'];// stocker dans des variables les valeurs des inputs
-        $prenom = $_POST['prenom'];// stocker dans des variables les valeurs des inputs
-        $adresse = $_POST['adresse'];// stocker dans des variables les valeurs des inputs
-        $num_carte = $_POST['num_carte'];// stocker dans des variables les valeurs des inputs
-        $date_exp = $_POST['date_exp'];// stocker dans des variables les valeurs des inputs
-        $cvv = $_POST['cvv'];// stocker dans des variables les valeurs des inputs
-        $stock-=1; // stock a -1
-
-        $query = $db->prepare("UPDATE moto SET stock = '$stock' WHERE moto_name = '$moto_name'");// SQL: Changer la valeur de stock ou le nom de la moto est le même que dans le input
-        $query->execute();// éxecution de la requête SQL
-
-        $query2 = $db->prepare("INSERT INTO users (nom, prenom, adresse, num_carte, date_exp, cvv) VALUES (:nom, :prenom, :adresse, :num_carte, :date_exp, :cvv)");// inserer dans la table users dans les colonnes x les valeurs x
-        $query2->execute(array(//execuiter la requete non préparée
-            ':nom' => $nom,
-            ':prenom' => $prenom,
-            ':adresse' => $adresse,
-            ':num_carte'=>$num_carte,
-            'date_exp'=>$date_exp,
-            ':cvv'=>$cvv
-        ));
-    }
-?>
+            </div>
         </div>
-            <footer>
-                <div class="container">
-                    <div class="footer-left">
-                        <h3>Legendary</h3>
-                        <p>&copy; 2023 | Tous droits réservés.</p>
-                    </div>
-                    <div class="footer-right">
-                        <ul>
-                            <li><a href="#">Nous Contacter</a></li>
-                            <li><a href="#">06 06 03 06 08</a></li>
-                            <li><a href="#">Instagram</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </footer>
-    </body>
-    
-    </html>
-    
+    </footer>
+</body>
 
+</html>

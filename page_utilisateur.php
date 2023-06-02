@@ -1,4 +1,14 @@
 <!-- page_utilisateur.php -->
+<?php
+session_start();
+
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['email'])) {
+    // Rediriger vers la page de connexion
+    header("Location: connecter.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -17,7 +27,7 @@
             <nav>
                 <img class="logo" src="./image/logo.png" alt="logo">
                 <ul>
-                    <li><a href="index.php">Modèles</a></li>
+                    <li><a href="page_utilisateur.php">Modèles</a></li>
                     <li><a href="commande.php">Achats</a></li>
                     <li><a href="#">Entretien</a></li>
                     <li><a href="#">Notre marque</a></li>
@@ -29,18 +39,18 @@
             <h1>Nouveaux modèles pour <br><span>2023</span></h1>
         </section>
     </div>
-<?php
-include "connexion.php"; // possibilité d'uttiliser les fonctions d'un autre fichier
-$query = $db->prepare("SELECT * FROM moto"); //requete qui récupere tout dans la table moto
-$query->execute(); //Executer la requête
-$data = $query->fetchAll(); // récuperer toutes les infos de la table
-echo/* écire dans la page html */ '
+    <?php
+    include "connexion.php"; // possibilité d'uttiliser les fonctions d'un autre fichier
+    $query = $db->prepare("SELECT * FROM moto"); //requete qui récupere tout dans la table moto
+    $query->execute(); //Executer la requête
+    $data = $query->fetchAll(); // récuperer toutes les infos de la table
+    echo/* écire dans la page html */ '
     <main>
         <h2>Modeles</h2>
         <hr>
         <section class="moto">';
-                foreach($data as $row){//Boucle pour chaque lignes de la table ça va afficher chaque valeurs de la lignes
-                    echo"<div class='véhicule'>
+    foreach ($data as $row) { //Boucle pour chaque lignes de la table ça va afficher chaque valeurs de la lignes
+        echo "<div class='véhicule'>
                             <div class='Honda'>
                                 <a href='commande.php?id_moto=$row[id]&stock=$row[stock]&moto_name=$row[moto_name]&prix=$row[prix]'>
                                 <img src='./moto/$row[image_url]' alt='$row[moto_name]'>
@@ -50,26 +60,26 @@ echo/* écire dans la page html */ '
                                 <p>En stock : $row[stock]</p>
                             </div>
                         </div>";
-                }
-                echo'
+    }
+    echo '
         </section>
     </main>';
-?>
+    ?>
     <footer>
         <div class="container">
-          <div class="footer-left">
-            <h3>Legendary</h3>
-            <p>&copy; 2023 | Tous droits réservés.</p>
-          </div>
-          <div class="footer-right">
-            <ul>
-              <li><a href="#">Nous Contacter</a></li>
-              <li><a href="#">06 06 03 06 08</a></li>
-              <li><a href="#">Instagram</a></li>
-            </ul>
-          </div>
+            <div class="footer-left">
+                <h3>Legendary</h3>
+                <p>&copy; 2023 | Tous droits réservés.</p>
+            </div>
+            <div class="footer-right">
+                <ul>
+                    <li><a href="#">Nous Contacter</a></li>
+                    <li><a href="#">06 06 03 06 08</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
         </div>
-      </footer>
+    </footer>
 </body>
 
 </html>

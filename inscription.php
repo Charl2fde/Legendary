@@ -16,7 +16,7 @@
             <img class="logo" src="./image/logo.png" alt="logo">
             <ul>
                 <li><a href="index.php">Modèles</a></li>
-                <li><a href="commande.php">Achats</a></li>
+                <li><a href="inscription.php">Achats</a></li>
                 <li><a href="#">Entretien</a></li>
                 <li><a href="#">Notre marque</a></li>
                 <li><a href="inscription.php">Connexion</a></li>
@@ -30,6 +30,15 @@
         <form action="inscription.php" method="POST">
             <label for="nom">Nom :</label>
             <input type="text" id="nom" name="nom" required><br><br>
+
+            <label for="prenom">Prénom :</label>
+            <input type="text" id="prenom" name="prenom"><br><br>
+
+            <label for="adresse">Adresse :</label>
+            <input type="text" id="adresse" name="adresse"><br><br>
+
+            <label for="code_postal">Code Postal :</label>
+            <input type="text" id="code_postal" name="code_postal"><br><br>
 
             <label for="email">Mail :</label>
             <input type="email" id="email" name="email" required><br><br>
@@ -50,6 +59,9 @@ include('connexion.php');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupérer les données du formulaire
     $nom = $_POST['nom'];
+    $prenom = $_POST['prenom'];
+    $adresse = $_POST['adresse'];
+    $code_postal = $_POST['code_postal'];
     $email = $_POST['email'];
     $motdepasse = password_hash($_POST['motdepasse'], PASSWORD_DEFAULT); // Hasher le mot de passe
 
@@ -57,11 +69,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     include "connexion.php";
 
     // Préparer et exécuter la requête d'insertion
-    $query = $db->prepare("INSERT INTO compte (nom, email, motdepasse, role) VALUES (?, ?, ?, 'utilisateur')");
-    $query->execute([$nom, $email, $motdepasse]);
+    $query = $db->prepare("INSERT INTO compte (nom, prenom, adresse, code_postal, email, motdepasse, role) VALUES (?, ?, ?, ?, ?, ?, 'utilisateur')");
+    $query->execute([$nom, $prenom, $adresse, $code_postal, $email, $motdepasse]);
 
     // Rediriger vers une page de succès ou afficher un message
-    header("Location: inscription_success.php");
+    header("Location: connecter.php");
     exit;
 }
 ?>
