@@ -1,70 +1,86 @@
 <?php
-include('connexion.php');
+include "connexion.php";
 session_start();
 
 // Vérifier si l'utilisateur est connecté
-if (isset($_SESSION['id_compte'])) {
-    // Récupérer l'ID du compte connecté
-    $id_compte = $_SESSION['id_compte'];
+if (!isset($_SESSION['email'])) {
     // Rediriger vers la page de connexion
     header("Location: connecter.php");
     exit;
 }
 
+// Récupérer les informations de la moto sélectionnée
+if (isset($_GET['id_moto']) && isset($_GET['stock']) && isset($_GET['moto_name']) && isset($_GET['prix'])) {
+    $idMoto = $_GET['id_moto'];
+    $stock = $_GET['stock'];
+    $motoName = $_GET['moto_name'];
+    $prix = $_GET['prix'];
+} else {
+    // Rediriger vers la page utilisateur si les informations de la moto sont manquantes
+    header("Location: page_utilisateur.php");
+    exit;
+}
 
-error_reporting(0);
+// Initialiser les variables pour éviter les erreurs
+$nom = $prenom = $adresse = $codePostal = $email = $numCarte = $dateExp = $cvv = "";
+$message = "";
 
-if (isset($_POST["submit"])) {
-    // Récupérer les valeurs des champs du formulaire
-    $id_moto = $_POST['id_moto'];
+// Traitement du formulaire de commande
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Récupérer les données du formulaire
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
     $adresse = $_POST['adresse'];
-    $code_postal = $_POST['code_postal'];
+    $codePostal = $_POST['code_postal'];
     $email = $_POST['email'];
+    $numCarte = $_POST['num_carte'];
+    $dateExp = $_POST['date_exp'];
+    $cvv = $_POST['cvv'];
 
-    // Effectuer les opérations nécessaires (par exemple, récupérer le prix de la moto)
-    $query_moto = $db->prepare("SELECT prix FROM moto WHERE id = :id_moto");
-    $query_moto->execute(array(':id_moto' => $id_moto));
-    $row = $query_moto->fetch(PDO::FETCH_ASSOC);
-    $prix = $row['prix'];
+    // Vérifier si la moto est en stock
+    if ($stock > 0) {
+        // Réduire le stock de la moto
+        $stock--;
 
-    // Récupérer l'ID du compte connecté
-    $id_compte = $_SESSION['id_compte'];
+        // Mettre à jour le stock dans la table "moto"
+        $query = $db->prepare("UPDATE moto SET stock = ? WHERE idMoto = ?");
+        $query->execute([$stock, $idMoto]);
 
-    // Insérer les données dans la table commande
-    $query = $db->prepare("INSERT INTO commande (id_moto, prix, prenom, nom, adresse, code_postal, email, id_compte)
-    VALUES (:id_moto, :prix, :prenom, :nom, :adresse, :code_postal, :email, :id_compte)");
-    $query->execute(array(
-        ':id_moto' => $id_moto,
-        ':prix' => $prix,
-        ':prenom' => $prenom,
-        ':nom' => $nom,
-        ':adresse' => $adresse,
-        ':code_postal' => $code_postal,
-        ':email' => $email,
-        ':id_compte' => $id_compte,
-    ));
+        // Insérer la commande dans la table "commande"
+        $query = $db->prepare("INSERT INTO commande (nom, prenom, id_moto, prix, adresse, email, code_postal, dateCommande) VALUES (?, ?, ?, ?, ?, ?, ?, CURDATE())");
+        $query->execute([$nom, $prenom, $idMoto, $prix, $adresse, $email, $codePostal]);
 
-    // Mettre à jour le stock de la moto
-    $query = $db->prepare("UPDATE moto SET stock = stock - 1 WHERE id = :id_moto");
-    $query->execute(array(':id_moto' => $id_moto));
+        // Récupérer l'ID de la dernière commande insérée
+        $idCommande = $db->lastInsertId();
 
-    // Rediriger vers une page de confirmation ou une autre page appropriée
-    header("Location: page_utilisateur.php");
-    exit();
+        // Insérer la relation dans la table "contenir"
+        $query = $db->prepare("INSERT INTO contenir (idCommande, idMoto) VALUES (?, ?)");
+        $query->execute([$idCommande, $idMoto]);
+
+
+        // Récupérer l'ID du compte de l'utilisateur connecté
+        $query = $db->prepare("SELECT idCompte FROM compte WHERE email = ?");
+        $query->execute([$email]);
+        $compte = $query->fetch();
+
+        if ($compte) {
+            $idCompte = $compte['idCompte'];
+
+            // Insérer les données dans la table "passer"
+            $query = $db->prepare("INSERT INTO passer (idCommande, idCompte) VALUES (?, ?)");
+            $query->execute([$idCommande, $idCompte]);
+        } else {
+            // Gérer le cas où l'ID du compte n'a pas été trouvé
+            echo "Erreur : ID du compte non trouvé.";
+        }
+
+        // Message de succès
+        $message = "La commande a été passée avec succès.";
+    }
 }
 
-// Récupérer les informations du compte connecté
-$id_compte = $_SESSION['id_compte'];
-$query_compte = $db->prepare("SELECT prenom, nom, adresse, code_postal, email FROM compte WHERE id = :id_compte");
-$query_compte->execute(array(':id_compte' => $id_compte));
-$compte = $query_compte->fetch(PDO::FETCH_ASSOC);
-$prenom = $compte['prenom'];
-$nom = $compte['nom'];
-$adresse = $compte['adresse'];
-$code_postal = $compte['code_postal'];
-$email = $compte['email'];
+// Récupérer l'email du compte connecté
+$email = $_SESSION['email'] ?? '';
 ?>
 
 <!DOCTYPE html>
@@ -85,7 +101,6 @@ $email = $compte['email'];
             <img class="logo" src="./image/logo.png" alt="logo">
             <ul>
                 <li><a href="page_utilisateur.php">Modèles</a></li>
-                <li><a href="commande.php">Achats</a></li>
                 <li><a href="#">Entretien</a></li>
                 <li><a href="#">Notre marque</a></li>
                 <li><a href="profil.php">Mon profil</a></li>
@@ -96,7 +111,7 @@ $email = $compte['email'];
     <h2>Ma commande :</h2>
 
     <div class="formulaire">
-        <form action="commande.php" method="post">
+        <form action="commande.php?id_moto=<?php echo $idMoto; ?>&stock=<?php echo $stock; ?>&moto_name=<?php echo urlencode($motoName); ?>&prix=<?php echo $prix; ?>" method="post">
             <label for="nom">Nom :</label>
             <input type="text" id="nom" name="nom" value="<?php echo $nom; ?>" required>
 
@@ -107,28 +122,24 @@ $email = $compte['email'];
             <input type="text" id="adresse" name="adresse" value="<?php echo $adresse; ?>" required>
 
             <label for="code_postal">Code Postal :</label>
-            <input type="text" id="code_postal" name="code_postal" value="<?php echo $code_postal; ?>" required>
+            <input type="text" id="code_postal" name="code_postal" value="<?php echo htmlspecialchars($codePostal ?? ''); ?>" required>
 
             <label for="email">Email :</label>
-            <input type="email" id="email" name="email" value="<?php echo $email; ?>" required>
+            <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>" required readonly>
 
             <label for="moyen_paiement">Moyen de paiement :</label>
             <input type="text" id="num_carte" name="num_carte" placeholder="Numéro de carte bancaire" required>
             <input type="text" id="date_exp" name="date_exp" placeholder="Date d'expiration" required>
             <input type="text" id="cvv" name="cvv" placeholder="Code CVV" required>
 
-            <?php
-            $moto_name = $_GET['moto_name'];
-            $id = $_GET['id_moto'];
-            echo "
-                <input type='hidden' name='id_moto' value='$id'>
-                <label for='moto_name'>Nom de la moto :</label>
-                <input type='text' id='moto_name' name='moto_name' value='$moto_name' readonly>
-            ";
-            ?>
+            <input type="hidden" name="id_moto" value="<?php echo $idMoto; ?>">
+            <input type="hidden" name="stock" value="<?php echo $stock; ?>">
+            <input type="hidden" name="moto_name" value="<?php echo $motoName; ?>">
+            <input type="hidden" name="prix" value="<?php echo $prix; ?>">
 
             <input type="submit" value="Commander" name="submit" class="submit">
         </form>
+        <?php echo $message; ?>
     </div>
 
     <footer>

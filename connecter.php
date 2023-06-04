@@ -49,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
+
 <body>
 
     <header>
@@ -56,7 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <img class="logo" src="./image/logo.png" alt="logo">
             <ul>
                 <li><a href="index.php">Modèles</a></li>
-                <li><a href="inscription.php">Achats</a></li>
                 <li><a href="#">Entretien</a></li>
                 <li><a href="#">Notre marque</a></li>
                 <li><a href="inscription.php">Connexion</a></li>

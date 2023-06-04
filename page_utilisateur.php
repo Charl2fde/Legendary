@@ -28,7 +28,7 @@ if (!isset($_SESSION['email'])) {
                 <img class="logo" src="./image/logo.png" alt="logo">
                 <ul>
                     <li><a href="page_utilisateur.php">Modèles</a></li>
-                    <li><a href="commande.php">Achats</a></li>
+                    
                     <li><a href="#">Entretien</a></li>
                     <li><a href="#">Notre marque</a></li>
                     <li><a href="profil.php">Mon profil</a></li>
@@ -52,7 +52,7 @@ if (!isset($_SESSION['email'])) {
     foreach ($data as $row) { //Boucle pour chaque lignes de la table ça va afficher chaque valeurs de la lignes
         echo "<div class='véhicule'>
                             <div class='Honda'>
-                                <a href='commande.php?id_moto=$row[id]&stock=$row[stock]&moto_name=$row[moto_name]&prix=$row[prix]'>
+                                <a href='commande.php?id_moto=$row[idMoto]&stock=$row[stock]&moto_name=$row[moto_name]&prix=$row[prix]'>
                                 <img src='./moto/$row[image_url]' alt='$row[moto_name]'>
                                 </a>
                                 <h3>$row[moto_name]</h3>

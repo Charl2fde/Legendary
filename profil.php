@@ -16,7 +16,6 @@
             <img class="logo" src="./image/logo.png" alt="logo">
             <ul>
                 <li><a href="page_utilisateur.php">Modèles</a></li>
-                <li><a href="commande.php">Achats</a></li>
                 <li><a href="#">Entretien</a></li>
                 <li><a href="#">Notre marque</a></li>
                 <li><a href="profil.php">Mon profil</a></li>
@@ -67,7 +66,7 @@
                 </tr>
                 <?php
                 // Récupérer l'historique d'achat de l'utilisateur à partir de la base de données
-                $query = $db->prepare("SELECT moto.moto_name, commande.id, commande.date, commande.prix FROM commande LEFT JOIN moto ON commande.id_moto = moto.id WHERE commande.id = (SELECT id FROM compte WHERE email = ?)");
+                $query = $db->prepare("SELECT moto.moto_name, commande.idCommande, commande.dateCommande, commande.prix FROM commande LEFT JOIN moto ON commande.id_moto = moto.idMoto WHERE commande.email = ?");
                 $query->execute([$email]);
                 $commandes = $query->fetchAll();
 
@@ -75,14 +74,16 @@
                 foreach ($commandes as $commande) {
                     echo "<tr>";
                     echo "<td>" . $commande['moto_name'] . "</td>";
-                    echo "<td>" . $commande['id'] . "</td>";
-                    echo "<td>" . $commande['date'] . "</td>";
+                    echo "<td>" . $commande['idCommande'] . "</td>";
+                    echo "<td>" . $commande['dateCommande'] . "</td>";
                     echo "<td>" . $commande['prix'] . "</td>";
                     echo "</tr>";
                 }
                 ?>
             </table>
         </section>
+
+
 
         <a href="deconnecter.php" class="deconnexion-button">Déconnexion</a>
     </main>
