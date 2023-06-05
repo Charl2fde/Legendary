@@ -1,8 +1,6 @@
 <?php
-
 // Inclure le fichier de configuration
 include "./config/config.php";
-
 // Connexion à la base de données
 try {
     $db = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
@@ -13,5 +11,18 @@ try {
     echo "Erreur de connexion : " . $e->getMessage();
 }
 
+// Test de la connexion à la base de données
+function testDatabaseConnection()
+{
+    global $db;
+    // Vérifier si la connexion est établie avec succès
+    if ($db !== null) {
+        echo "La connexion à la base de données a réussi.";
+    } else {
+        echo "La connexion à la base de données a échoué.";
+    }
+}
 
+// Exécuter le test
+testDatabaseConnection();
 ?>
