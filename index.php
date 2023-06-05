@@ -1,4 +1,6 @@
 <?php
+include('connexion.php');
+include "config/config.php";
 if (session_status() === PHP_SESSION_ACTIVE) {
     // La session est déjà démarrée
     // Vous pouvez accéder aux variables de session ici

@@ -20,7 +20,6 @@ error_reporting(E_ALL);
 
 // Reste du code...
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupérer les données du formulaire
     $email = $_POST['email'];
