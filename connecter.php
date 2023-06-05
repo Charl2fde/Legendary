@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <header>
         <nav>
-            <img class="logo" src="./image/logo.png" alt="logo">
+        <a href="index.php"><img class="logo" src="./image/logo.png" alt="logo"></a>
             <ul>
                 <li><a href="index.php">Modèles</a></li>
                 <li><a href="#">Entretien</a></li>

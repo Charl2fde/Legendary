@@ -1,3 +1,13 @@
+<?php
+if (session_status() === PHP_SESSION_ACTIVE) {
+    // La session est déjà démarrée
+    // Vous pouvez accéder aux variables de session ici
+} else {
+    // La session n'est pas démarrée
+    // Vous pouvez démarrer la session ici si nécessaire
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -14,12 +24,23 @@
     <div class="haut-main">
         <header>
             <nav>
-                <img class="logo" src="./image/logo.png" alt="logo">
+                <a href="index.php"><img class="logo" src="./image/logo.png" alt="logo"></a>
                 <ul>
                     <li><a href="index.php">Modèles</a></li>
                     <li><a href="#">Entretien</a></li>
                     <li><a href="#">Notre marque</a></li>
-                    <li><a href="inscription.php">Connexion</a></li>
+                    <li>
+                        <?php
+                        // include "page_admin.php";
+                        if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
+                            echo '<a href="inscription.php">Connexion</a>';
+                        } else {
+                            echo '<a href="page_admin.php">Admin</a>';
+                        }
+                        ?>
+                    </li>
+
+
                 </ul>
             </nav>
         </header>

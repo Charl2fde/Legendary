@@ -25,6 +25,7 @@
 
 body {
   font-family: 'Poppins', sans-serif;
+  overflow: visible;
 }
 
 /* --------------------------------------header-------------------- */
@@ -278,7 +279,7 @@ footer {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 600px;
+  /* height: 600px; */
   padding-top: 65px;
   border-radius: 10px;
 }
@@ -427,4 +428,17 @@ select:focus {
 #item-p {
   font-size: 20px;
   color: white;
+}
+
+#btn-deconnexion {
+  background-color: #FF4C4C ; /* Couleur de fond */
+  color: white; /* Couleur du texte */
+  padding: 10px 20px; /* Espacement interne */
+  border: none; /* Suppression de la bordure */
+  cursor: pointer; /* Curseur de type pointeur */
+  border-radius: 4px; /* Coins arrondis */
+}
+
+#btn-deconnexion:hover {
+  background-color: #FF4545; /* Couleur de fond au survol */
 }

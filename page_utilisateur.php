@@ -25,7 +25,7 @@ if (!isset($_SESSION['email'])) {
     <div class="haut-main">
         <header>
             <nav>
-                <img class="logo" src="./image/logo.png" alt="logo">
+            <a href="index.php"><img class="logo" src="./image/logo.png" alt="logo"></a>
                 <ul>
                     <li><a href="page_utilisateur.php">Modèles</a></li>
                     

@@ -74,7 +74,7 @@ if ($db) {
         <div class="haut-main" id="unique">
             <header>
                 <nav>
-                    <img class="logo" src="./image/logo.png" alt="logo">
+                <a href="index.php"><img class="logo" src="./image/logo.png" alt="logo"></a>
                     <ul>
                         <li><a href="index.php">Modèles</a></li>
                         <li><a href="#">Entretien</a></li>
@@ -139,7 +139,7 @@ if ($db) {
 
         </div>
         <form method="POST">
-    <button type="submit" name="deconnexion" id="btn-deconnexion">Se déconnecter</button>
+        <button type="submit" name="deconnexion" id="btn-deconnexion">Se déconnecter</button>
 </form>
     </form>
     <script>
