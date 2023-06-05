@@ -58,30 +58,33 @@
         <section class="historique">
             <h2>Historique d'achat</h2>
             <table>
+                <caption>Description de la commande</caption>
                 <tr>
                     <th>Modèle de la moto</th>
                     <th>ID de commande</th>
                     <th>Date de commande</th>
                     <th>Prix payé</th>
                 </tr>
-                <?php
-                // Récupérer l'historique d'achat de l'utilisateur à partir de la base de données
-                $query = $db->prepare("SELECT moto.moto_name, commande.idCommande, commande.dateCommande, commande.prix FROM commande LEFT JOIN moto ON commande.id_moto = moto.idMoto WHERE commande.email = ?");
-                $query->execute([$email]);
-                $commandes = $query->fetchAll();
+            </table>
 
-                // Afficher chaque commande dans le tableau
-                define('TABLE_CELL_END', "</td>");
+            <?php
+            // Récupérer l'historique d'achat de l'utilisateur à partir de la base de données
+            $query = $db->prepare("SELECT moto.moto_name, commande.idCommande, commande.dateCommande, commande.prix FROM commande LEFT JOIN moto ON commande.id_moto = moto.idMoto WHERE commande.email = ?");
+            $query->execute([$email]);
+            $commandes = $query->fetchAll();
 
-                foreach ($commandes as $commande) {
-                    echo "<tr>";
-                    echo "<td>" . $commande['moto_name'] . TABLE_CELL_END;
-                    echo "<td>" . $commande['idCommande'] . TABLE_CELL_END;
-                    echo "<td>" . $commande['dateCommande'] . TABLE_CELL_END;
-                    echo "<td>" . $commande['prix'] . TABLE_CELL_END;
-                    echo "</tr>";
-                }
-                ?>
+            // Afficher chaque commande dans le tableau
+            define('TABLE_CELL_END', "</td>");
+
+            foreach ($commandes as $commande) {
+                echo "<tr>";
+                echo "<td>" . $commande['moto_name'] . TABLE_CELL_END;
+                echo "<td>" . $commande['idCommande'] . TABLE_CELL_END;
+                echo "<td>" . $commande['dateCommande'] . TABLE_CELL_END;
+                echo "<td>" . $commande['prix'] . TABLE_CELL_END;
+                echo "</tr>";
+            }
+            ?>
 
             </table>
         </section>

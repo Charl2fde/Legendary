@@ -58,6 +58,7 @@ if ($db && $_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -115,7 +116,7 @@ if ($db && $_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="input-icon">
                         <input type="number" id="prix-article" placeholder="Prix de l'article" name="prix-article">
                         <!-- Ajout de l'attribut name -->
-                        <i class="fas fa-euro-sign"></i>
+                        <em class="fas fa-euro-sign"></em>
                     </div>
                     <p class="info">Stock actuel :
                         <span id="stock-actuel"></span>
@@ -125,18 +126,18 @@ if ($db && $_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="input-icon">
                         <input type="number" id="ajouter-quantite" placeholder="Quantité à ajouter"
                             name="ajouter-quantite"> <!-- Ajout de l'attribut name -->
-                        <i class="fas fa-plus"></i>
+                        <em class="fas fa-plus"></em>
                     </div>
 
                     <label for="supprimer-quantite">Supprimer une quantité :</label>
                     <div class="input-icon">
                         <input type="number" id="supprimer-quantite" placeholder="Quantité à supprimer"
                             name="supprimer-quantite"> <!-- Ajout de l'attribut name -->
-                        <i class="fas fa-minus"></i>
+                        <em class="fas fa-minus"></em>
                     </div>
-                    <button id="bouton-valider" type="submit"><i class="fas fa-check"></i> Valider</button>
+                    <button id="bouton-valider" type="submit"><em class="fas fa-check"></em> Valider</button>
                     <!-- Ajout du type submit -->
-                    <button id="bouton-supprimer" name="bouton-supprimer" value="supprimer"><i class="fas fa-trash-alt"></i> Mettre le stock a 0</button>
+                    <button id="bouton-supprimer" name="bouton-supprimer" value="supprimer"><em class="fas fa-trash-alt"></em> Mettre le stock a 0</button>
                 </div>
             </section>
 
