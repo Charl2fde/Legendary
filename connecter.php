@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         } else {
             // Rediriger vers la page utilisateur
-            header("Location: page_utilisateur.php");
+            header("Location: index.php");
             exit;
         }
     } else {
