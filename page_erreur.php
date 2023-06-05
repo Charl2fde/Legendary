@@ -1,7 +1,6 @@
 <?php
 header("Refresh: 3; URL=index.php");
 ?>
-<html lang="en">
 
 <!DOCTYPE html>
     <html lang="en">
