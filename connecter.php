@@ -9,11 +9,10 @@
     <title>Connexion</title>
 </head>
 <?php
+session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-
 include('connexion.php');
-session_start(); // Démarrer une session
 
 // Reste du code...
 
