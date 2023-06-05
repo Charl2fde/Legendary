@@ -1,5 +1,5 @@
 <?php
-include "connexion.php";
+define('CONNEXION_FILE', 'connexion.php');
 session_start();
 if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
     // Rediriger vers une page d'erreur ou de connexion
@@ -7,7 +7,7 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
     exit;
 }
 
-include "connexion.php";
+include CONNEXION_FILE;
 session_start();
 if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
     // Rediriger vers une page d'erreur ou de connexion
@@ -87,7 +87,7 @@ if ($db && $_SERVER['REQUEST_METHOD'] === 'POST') {
                 </nav>
             </header>
             <?php
-            include "connexion.php";
+            include CONNEXION_FILE;
 
             // Vérifier si la connexion à la base de données est établie avec succès
             if ($db) {
