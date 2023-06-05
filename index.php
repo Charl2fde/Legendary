@@ -35,13 +35,14 @@ if (session_status() === PHP_SESSION_ACTIVE) {
                         <?php
                         if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
                             echo '<a href="inscription.php">Connexion</a>';
-                        }
-                        if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'utilisateur') {
+                        } elseif ($_SESSION['role'] === 'utilisateur') {
                             echo '<a href="profil.php">Mon Profil</a>';
                         } else {
                             echo '<a href="page_admin.php">Admin</a>';
                         }
                         ?>
+
+
                     </li>
 
 
