@@ -9,6 +9,18 @@ if (session_status() === PHP_SESSION_ACTIVE) {
     // Vous pouvez démarrer la session ici si nécessaire
     session_start();
 }
+
+ // Vérifier si une session est active
+ if (isset($_SESSION['email'])) {
+    // Afficher l'email de la session
+    echo 'Email de la session : ' . $_SESSION['email'] . '<br>';
+
+    // Afficher le rôle de la session
+    echo 'Rôle de la session : ' . $_SESSION['role'];
+} else {
+    // Aucune session active
+    echo 'Aucune session active.';
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
