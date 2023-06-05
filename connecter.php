@@ -11,8 +11,12 @@
 <?php
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
+
 include('connexion.php');
 session_start(); // Démarrer une session
+
+// Reste du code...
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupérer les données du formulaire
