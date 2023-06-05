@@ -1,3 +1,7 @@
+<?php
+session_start();
+include('connexion.php');
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -9,10 +13,9 @@
     <title>Connexion</title>
 </head>
 <?php
-session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-include('connexion.php');
+
 
 // Reste du code...
 
@@ -43,7 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: page_admin.php");
             exit;
         } else {
+            ob_start(); // Démarrer la temporisation de sortie
             header("Location: page_utilisateur.php");
+            ob_end_flush(); // Envoyer le contenu du tampon de sortie
             exit;
         }
     } else {
