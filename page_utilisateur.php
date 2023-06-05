@@ -1,7 +1,7 @@
-<!-- page_utilisateur.php -->
 <?php
-include "connexion.php";
 session_start();
+include('connexion.php');
+include "config/config.php";
 
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['email'])) {
@@ -26,10 +26,9 @@ if (!isset($_SESSION['email'])) {
     <div class="haut-main">
         <header>
             <nav>
-            <a href="index.php"><img class="logo" src="./image/logo.png" alt="logo"></a>
+                <a href="index.php"><img class="logo" src="./image/logo.png" alt="logo"></a>
                 <ul>
                     <li><a href="page_utilisateur.php">Modèles</a></li>
-                    
                     <li><a href="#">Entretien</a></li>
                     <li><a href="#">Notre marque</a></li>
                     <li><a href="profil.php">Mon profil</a></li>
@@ -41,16 +40,16 @@ if (!isset($_SESSION['email'])) {
         </section>
     </div>
     <?php
-    include "connexion.php"; // possibilité d'uttiliser les fonctions d'un autre fichier
-    $query = $db->prepare("SELECT * FROM moto"); //requete qui récupere tout dans la table moto
-    $query->execute(); //Executer la requête
-    $data = $query->fetchAll(); // récuperer toutes les infos de la table
-    echo/* écire dans la page html */ '
+    include "connexion.php";
+    $query = $db->prepare("SELECT * FROM moto");
+    $query->execute();
+    $data = $query->fetchAll();
+    echo '
     <main>
         <h2>Modeles</h2>
         <hr>
         <section class="moto">';
-    foreach ($data as $row) { //Boucle pour chaque lignes de la table ça va afficher chaque valeurs de la lignes
+    foreach ($data as $row) {
         echo "<div class='véhicule'>
                             <div class='Honda'>
                                 <a href='commande.php?id_moto=$row[idMoto]&stock=$row[stock]&moto_name=$row[moto_name]&prix=$row[prix]'>

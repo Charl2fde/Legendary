@@ -2,31 +2,11 @@
 session_start();
 include('connexion.php');
 include "config/config.php";
-?>
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/connecter.css">
-    <title>Connexion</title>
-</head>
-<?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
-
-// Reste du code...
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupérer les données du formulaire
     $email = $_POST['email'];
     $motdepasse = $_POST['motdepasse'];
-
-    // Inclure le fichier de connexion à la base de données
-    include "connexion.php";
 
     // Vérifier les informations de connexion
     $query = $db->prepare("SELECT * FROM compte WHERE email = ?");
@@ -46,9 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: page_admin.php");
             exit;
         } else {
-            ob_start(); // Démarrer la temporisation de sortie
+            // Rediriger vers la page utilisateur
             header("Location: page_utilisateur.php");
-            ob_end_flush(); // Envoyer le contenu du tampon de sortie
             exit;
         }
     } else {
@@ -57,12 +36,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/connecter.css">
+    <title>Connexion</title>
+</head>
 
 <body>
-
     <header>
         <nav>
-        <a href="index.php"><img class="logo" src="./image/logo.png" alt="logo"></a>
+            <a href="index.php"><img class="logo" src="./image/logo.png" alt="logo"></a>
             <ul>
                 <li><a href="index.php">Modèles</a></li>
                 <li><a href="#">Entretien</a></li>
@@ -83,7 +71,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="submit" value="Se connecter">
             <p>Vous n'avez pas de compte ? <a href="inscription.php">Inscription</a></p>
         </form>
-
     </div>
 </body>
 
