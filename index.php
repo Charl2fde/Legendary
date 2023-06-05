@@ -37,10 +37,11 @@ if (session_status() === PHP_SESSION_ACTIVE) {
                             echo '<a href="inscription.php">Connexion</a>';
                         } elseif ($_SESSION['role'] === 'utilisateur') {
                             echo '<a href="profil.php">Mon Profil</a>';
-                        } else {
+                        } elseif ($_SESSION['role'] === 'admin') {
                             echo '<a href="page_admin.php">Admin</a>';
                         }
                         ?>
+
 
 
                     </li>
