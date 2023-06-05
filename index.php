@@ -31,7 +31,6 @@ if (session_status() === PHP_SESSION_ACTIVE) {
                     <li><a href="#">Notre marque</a></li>
                     <li>
                         <?php
-                        // include "page_admin.php";
                         if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
                             echo '<a href="inscription.php">Connexion</a>';
                         } else {

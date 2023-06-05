@@ -13,7 +13,7 @@
 <body>
     <header>
         <nav>
-        <a href="index.php"><img class="logo" src="./image/logo.png" alt="logo"></a>
+            <a href="index.php"><img class="logo" src="./image/logo.png" alt="logo"></a>
             <ul>
                 <li><a href="page_utilisateur.php">Modèles</a></li>
                 <li><a href="#">Entretien</a></li>
@@ -71,15 +71,18 @@
                 $commandes = $query->fetchAll();
 
                 // Afficher chaque commande dans le tableau
+                define('TABLE_CELL_END', "</td>");
+
                 foreach ($commandes as $commande) {
                     echo "<tr>";
-                    echo "<td>" . $commande['moto_name'] . "</td>";
-                    echo "<td>" . $commande['idCommande'] . "</td>";
-                    echo "<td>" . $commande['dateCommande'] . "</td>";
-                    echo "<td>" . $commande['prix'] . "</td>";
+                    echo "<td>" . $commande['moto_name'] . TABLE_CELL_END;
+                    echo "<td>" . $commande['idCommande'] . TABLE_CELL_END;
+                    echo "<td>" . $commande['dateCommande'] . TABLE_CELL_END;
+                    echo "<td>" . $commande['prix'] . TABLE_CELL_END;
                     echo "</tr>";
                 }
                 ?>
+
             </table>
         </section>
 

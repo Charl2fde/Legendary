@@ -405,12 +405,6 @@ select:focus {
   background: #221d12;
 }
 
-#btn-deconnexion {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-}
-
 .container-all {
   width: 100%;
   height: 100vh;
@@ -437,6 +431,9 @@ select:focus {
   border: none; /* Suppression de la bordure */
   cursor: pointer; /* Curseur de type pointeur */
   border-radius: 4px; /* Coins arrondis */
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
 }
 
 #btn-deconnexion:hover {
