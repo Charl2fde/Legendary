@@ -7,54 +7,57 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
     exit;
 }
 
+include "connexion.php";
+session_start();
+if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
+    // Rediriger vers une page d'erreur ou de connexion
+    header("Location: page_erreur.php");
+    exit;
+}
+
 // Vérifier si le bouton de déconnexion a été cliqué
 if (isset($_POST['deconnexion'])) {
     // Supprimer toutes les variables de session
     session_unset();
-
     // Détruire la session
     session_destroy();
-
     // Rediriger vers la page de connexion ou une autre page de votre choix
     header("Location: index.php");
     exit;
 }
-?>
-<?php
+
 // Vérifier si la connexion à la base de données est établie avec succès
-if ($db) {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $motoName = $_POST['choix-article'];
-        $nouveauPrix = $_POST['prix-article'];
-        $quantiteASupprimer = $_POST['supprimer-quantite'];
-        $quantiteAAjouter = $_POST['ajouter-quantite'];
+if ($db && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    $motoName = $_POST['choix-article'];
+    $nouveauPrix = $_POST['prix-article'];
+    $quantiteASupprimer = $_POST['supprimer-quantite'];
+    $quantiteAAjouter = $_POST['ajouter-quantite'];
 
-        // Mettre à jour le prix de la moto
-        if (!empty($nouveauPrix)) {
-            $stmt = $db->prepare("UPDATE moto SET prix = :nouveauPrix WHERE moto_name = :motoName");
-            $stmt->execute(array('nouveauPrix' => $nouveauPrix, 'motoName' => $motoName));
-        }
-
-        // Mettre à jour le stock de la moto
-        if (isset($_POST['bouton-supprimer'])) {
-            $stmt = $db->prepare("UPDATE moto SET stock = 0 WHERE moto_name = :motoName");
-            $stmt->execute(array('motoName' => $motoName));
-        } else {
-            $stmt = $db->prepare("SELECT stock FROM moto WHERE moto_name = :motoName");
-            $stmt->execute(array('motoName' => $motoName));
-            $stockActuel = $stmt->fetchColumn();
-
-            $nouveauStock = intval($stockActuel) - intval($quantiteASupprimer) + intval($quantiteAAjouter);
-            $stmt = $db->prepare("UPDATE moto SET stock = :nouveauStock WHERE moto_name = :motoName");
-            $stmt->execute(array('nouveauStock' => $nouveauStock, 'motoName' => $motoName));
-        }
-
-        // Rediriger vers la page d'administration après avoir effectué les modifications
-        header("Location: page_admin.php");
-        exit();
+    // Mettre à jour le prix de la moto
+    if (!empty($nouveauPrix)) {
+        $stmt = $db->prepare("UPDATE moto SET prix = :nouveauPrix WHERE moto_name = :motoName");
+        $stmt->execute(array('nouveauPrix' => $nouveauPrix, 'motoName' => $motoName));
     }
+
+    // Mettre à jour le stock de la moto
+    if (isset($_POST['bouton-supprimer'])) {
+        $stmt = $db->prepare("UPDATE moto SET stock = 0 WHERE moto_name = :motoName");
+        $stmt->execute(array('motoName' => $motoName));
+    } else {
+        $stmt = $db->prepare("SELECT stock FROM moto WHERE moto_name = :motoName");
+        $stmt->execute(array('motoName' => $motoName));
+        $stockActuel = $stmt->fetchColumn();
+        $nouveauStock = intval($stockActuel) - intval($quantiteASupprimer) + intval($quantiteAAjouter);
+        $stmt = $db->prepare("UPDATE moto SET stock = :nouveauStock WHERE moto_name = :motoName");
+        $stmt->execute(array('nouveauStock' => $nouveauStock, 'motoName' => $motoName));
+    }
+
+    // Rediriger vers la page d'administration après avoir effectué les modifications
+    header("Location: page_admin.php");
+    exit();
 }
 ?>
+
 <html lang="en">
 
 <head>
