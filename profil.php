@@ -1,7 +1,18 @@
 <?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+// Démarrer la session
+session_start();
+
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['email'])) {
+    // Rediriger vers la page de connexion
+    header("Location: connecter.php");
+    exit;
+}
+
+// Inclure le fichier de connexion à la base de données
+include('connexion.php');
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -26,37 +37,26 @@ error_reporting(E_ALL);
             </ul>
         </nav>
     </header>
+
     <main>
         <section class="infos-perso">
+            <h2>Informations personnelles</h2>
             <?php
-            include('connexion.php');
-            session_start();
+            // Récupérer l'email de l'utilisateur connecté depuis la session
+            $email = $_SESSION['email'];
 
-            // Vérifier si l'utilisateur est connecté
-            if (isset($_SESSION['email'])) {
-                // Récupérer les informations personnelles de l'utilisateur à partir de la base de données
-                $email = $_SESSION['email'];
-
-                $query = $db->prepare("SELECT * FROM compte WHERE email = ?");
-                $query->execute([$email]);
-                $compte = $query->fetch();
+            // Requête pour récupérer les informations personnelles de l'utilisateur
+            $query = $db->prepare("SELECT * FROM compte WHERE email = ?");
+            $query->execute([$email]);
+            $compte = $query->fetch();
             ?>
-                <h2>Informations personnelles</h2>
-                <p><strong>Prénom :</strong> <?php echo isset($compte['prenom']) ? $compte['prenom'] : ''; ?></p>
-                <p><strong>Nom :</strong> <?php echo isset($compte['nom']) ? $compte['nom'] : ''; ?></p>
-                <p><strong>Email :</strong> <?php echo $email; ?></p>
-                <p><strong>Adresse :</strong> <?php echo isset($compte['adresse']) ? $compte['adresse'] : ''; ?></p>
-                <p><strong>Code Postal :</strong> <?php echo isset($compte['code_postal']) ? $compte['code_postal'] : ''; ?></p>
-                <p><strong>Mot de passe :</strong> *********</p>
-                <!-- Afficher d'autres informations personnelles selon votre structure de table -->
-            <?php
-            } else {
-                // L'utilisateur n'est pas connecté, rediriger vers la page de connexion
-                header("Location: connecter.php");
-                exit;
-            }
-            ?>
-
+            <p><strong>Prénom :</strong> <?php echo isset($compte['prenom']) ? $compte['prenom'] : ''; ?></p>
+            <p><strong>Nom :</strong> <?php echo isset($compte['nom']) ? $compte['nom'] : ''; ?></p>
+            <p><strong>Email :</strong> <?php echo $email; ?></p>
+            <p><strong>Adresse :</strong> <?php echo isset($compte['adresse']) ? $compte['adresse'] : ''; ?></p>
+            <p><strong>Code Postal :</strong> <?php echo isset($compte['code_postal']) ? $compte['code_postal'] : ''; ?></p>
+            <p><strong>Mot de passe :</strong> *********</p>
+            <!-- Ajouter ici d'autres informations personnelles selon votre structure de base de données -->
         </section>
 
         <section class="historique">
@@ -69,34 +69,28 @@ error_reporting(E_ALL);
                     <th>Date de commande</th>
                     <th>Prix payé</th>
                 </tr>
-            </table>
+                <?php
+                // Requête pour récupérer l'historique d'achat de l'utilisateur
+                $query = $db->prepare("SELECT moto.moto_name, commande.idCommande, commande.dateCommande, commande.prix FROM commande LEFT JOIN moto ON commande.id_moto = moto.idMoto WHERE commande.email = ?");
+                $query->execute([$email]);
+                $commandes = $query->fetchAll();
 
-            <?php
-            // Récupérer l'historique d'achat de l'utilisateur à partir de la base de données
-            $query = $db->prepare("SELECT moto.moto_name, commande.idCommande, commande.dateCommande, commande.prix FROM commande LEFT JOIN moto ON commande.id_moto = moto.idMoto WHERE commande.email = ?");
-            $query->execute([$email]);
-            $commandes = $query->fetchAll();
-
-            // Afficher chaque commande dans le tableau
-            define('TABLE_CELL_END', "</td>");
-
-            foreach ($commandes as $commande) {
-                echo "<tr>";
-                echo "<td>" . $commande['moto_name'] . TABLE_CELL_END;
-                echo "<td>" . $commande['idCommande'] . TABLE_CELL_END;
-                echo "<td>" . $commande['dateCommande'] . TABLE_CELL_END;
-                echo "<td>" . $commande['prix'] . TABLE_CELL_END;
-                echo "</tr>";
-            }
-            ?>
-
+                // Afficher chaque commande dans le tableau
+                foreach ($commandes as $commande) {
+                    echo "<tr>";
+                    echo "<td>" . $commande['moto_name'] . "</td>";
+                    echo "<td>" . $commande['idCommande'] . "</td>";
+                    echo "<td>" . $commande['dateCommande'] . "</td>";
+                    echo "<td>" . $commande['prix'] . "</td>";
+                    echo "</tr>";
+                }
+                ?>
             </table>
         </section>
 
-
-
         <a href="deconnecter.php" class="deconnexion-button">Déconnexion</a>
     </main>
+
 </body>
 
 </html>
