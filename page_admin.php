@@ -1,13 +1,8 @@
 <?php
 define('CONNEXION_FILE', 'connexion.php');
-session_start();
-if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
-    // Rediriger vers une page d'erreur ou de connexion
-    header("Location: page_erreur.php");
-    exit;
-}
-
 include CONNEXION_FILE;
+
+// Vérifier si l'utilisateur est connecté en tant qu'administrateur
 session_start();
 if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
     // Rediriger vers une page d'erreur ou de connexion

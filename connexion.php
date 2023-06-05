@@ -1,5 +1,4 @@
 <?php
-
 // Inclure le fichier de configuration
 include "./config/config.php";
 
@@ -12,6 +11,4 @@ try {
 } catch (PDOException $e) {
     echo "Erreur de connexion : " . $e->getMessage();
 }
-
-
 ?>

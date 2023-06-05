@@ -44,7 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: page_admin.php");
             exit;
         } else {
-            // Rediriger vers une page réservée aux utilisateurs
             header("Location: page_utilisateur.php");
             exit;
         }
