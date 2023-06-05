@@ -26,7 +26,14 @@ if (session_status() === PHP_SESSION_ACTIVE) {
     <div class="haut-main">
         <header>
             <nav>
-                <a href="index.php"><img class="logo" src="./image/logo.png" alt="logo"></a>
+                <?php
+                if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'utilisateur') {
+                    echo '<a href="inscription.php">Connexion</a>';
+                } else {
+                    echo '<a href="page_utilisateur.php"><img class="logo" src="./image/logo.png" alt="logo"></a>';
+                }
+                ?>
+
                 <ul>
                     <li><a href="index.php">Modèles</a></li>
                     <li><a href="#">Entretien</a></li>
