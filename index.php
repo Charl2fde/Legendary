@@ -10,8 +10,8 @@ if (session_status() === PHP_SESSION_ACTIVE) {
     session_start();
 }
 
- // Vérifier si une session est active
- if (isset($_SESSION['email'])) {
+// Vérifier si une session est active
+if (isset($_SESSION['email'])) {
     // Afficher l'email de la session
     echo 'Email de la session : ' . $_SESSION['email'] . '<br>';
 
@@ -45,12 +45,21 @@ if (session_status() === PHP_SESSION_ACTIVE) {
                     <li><a href="#">Notre marque</a></li>
                     <li>
                         <?php
-                        if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
+                        session_start();
+
+                        // Vérifier si une session est active
+                        if (isset($_SESSION['email'])) {
+                            // Vérifier le rôle de la session
+                            if ($_SESSION['role'] === 'admin') {
+                                echo '<a href="page_admin.php">Admin</a>';
+                            } elseif ($_SESSION['role'] === 'utilisateur') {
+                                echo '<a href="profil.php">Mon Profil</a>';
+                            } else {
+                                echo '<a href="inscription.php">Connexion</a>';
+                            }
+                        } else {
+                            // Aucune session active
                             echo '<a href="inscription.php">Connexion</a>';
-                        } elseif ($_SESSION['role'] === 'utilisateur') {
-                            echo '<a href="profil.php">Mon Profil</a>';
-                        } elseif ($_SESSION['role'] === 'admin') {
-                            echo '<a href="page_admin.php">Admin</a>';
                         }
                         ?>
 
