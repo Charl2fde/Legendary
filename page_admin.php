@@ -1,5 +1,4 @@
 <?php
-include "config/config.php";
 define('CONNEXION_FILE', 'connexion.php');
 include CONNEXION_FILE;
 

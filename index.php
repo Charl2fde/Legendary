@@ -1,14 +1,8 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 include('connexion.php');
-include "config/config.php";
-if (session_status() === PHP_SESSION_ACTIVE) {
-    // La session est déjà démarrée
-    // Vous pouvez accéder aux variables de session ici
-} else {
-    // La session n'est pas démarrée
-    // Vous pouvez démarrer la session ici si nécessaire
-    session_start();
-}
+session_start();
 
 ?>
 <!DOCTYPE html>
@@ -34,7 +28,6 @@ if (session_status() === PHP_SESSION_ACTIVE) {
                     <li><a href="#">Notre marque</a></li>
                     <li>
                         <?php
-                        session_start();
 
                         // Vérifier si une session est active
                         if (isset($_SESSION['email'])) {
