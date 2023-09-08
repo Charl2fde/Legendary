@@ -58,35 +58,46 @@ session_start();
         </section>
     </div>
     <?php
-    include "connexion.php";
-    $query = $db->prepare("SELECT * FROM moto");
-    $query->execute();
-    $data = $query->fetchAll();
-    echo '
-    <main>
-        <h2>Modèles</h2>
-        <hr>
-        <section class="moto">';
-    foreach ($data as $row) {
-        $id_moto = $row['idMoto'];
-        $stock = $row['stock'];
-        $moto_name = $row['moto_name'];
-        $prix = $row['prix'];
-        echo "<div class='véhicule'>
-                <div class='Honda'>
-                    <a href='connecter.php'>
-                        <img src='./moto/$row[image_url]' alt='$row[moto_name]'>
-                    </a>
-                    <h3>$row[moto_name]</h3>
-                    <p>Prix: $row[prix]</p>
-                    <p>En stock : $row[stock]</p>
-                </div>
-            </div>";
-    }
-    echo '
-        </section>
-    </main>';
-    ?>
+include "connexion.php";
+$query = $db->prepare("SELECT moto.*, GROUP_CONCAT(categorie.nomCategorie SEPARATOR ', ') AS categories
+                      FROM moto
+                      INNER JOIN moto_categorie ON moto.idMoto = moto_categorie.idMoto
+                      INNER JOIN categorie ON moto_categorie.idCategorie = categorie.idCategorie
+                      GROUP BY moto.idMoto");
+$query->execute();
+$data = $query->fetchAll();
+
+echo '
+<main>
+    <h2>Modèles</h2>
+    <hr>
+    <section class="moto">';
+foreach ($data as $row) {
+    $id_moto = $row['idMoto'];
+    $stock = $row['stock'];
+    $moto_name = $row['moto_name'];
+    $prix = $row['prix'];
+    $categories = $row['categories'];
+    $annee = $row['AnneeMoto'];
+
+    echo "<div class='véhicule'>
+            <div class='Honda'>
+                <a href='connecter.php'>
+                    <img src='./moto/$row[image_url]' alt='$row[moto_name]'>
+                </a>
+                <h3>$row[moto_name]</h3>
+                <p>Prix: $row[prix] €</p>
+                <p>En stock : $row[stock]</p>
+                <p>Catégories : $categories</p>
+                <p>Année : $annee</p>
+            </div>
+        </div>";
+}
+echo '
+    </section>
+</main>';
+?>
+
     <footer>
         <div class="container">
             <div class="footer-left">
